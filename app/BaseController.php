@@ -91,4 +91,44 @@ abstract class BaseController
         return $v->failException(true)->check($data);
     }
 
+    /**
+     * 响应数据的通用方法，响应json时调用
+     * @param $code string 返回状态码，必填
+     * @param mixed $data 返回数据，默认是一个数组，也可以是一个对象
+     * @param string $msg 返回的消息文本
+     * @return \think\response\Json
+     */
+    protected function response($code, $data = [], $msg = '请求成功')
+    {
+        $res = [
+            'code' => $code,
+            'msg' => $msg,
+            'data' => $data,
+        ];
+        return json($res);
+    }
+
+    /**
+     *  正确处理响应的返回形式，响应json时调用
+     * @param mixed $data 成功的数据。数组或者对象，也可以是空
+     * @param string $msg 返回的消息文本
+     * @param int $code 返回状态码，成功默认是0
+     * @return \think\response\Json
+     */
+    protected function resSuccess($data = [], $msg = '请求成功', $code = 0)
+    {
+        return $this->response($code, $data, $msg);
+    }
+
+    /**
+     * 错误处理响应的返回形式，响应json时调用
+     * @param string $msg 返回的消息文本
+     * @param mixed $data 失败的数据，一般为空
+     * @param int $code 返回状态码，失败默认是1
+     * @return \think\response\Json
+     */
+    protected function resFail($msg = '请求失败', $code = 1, $data = [])
+    {
+        return $this->response($code, $data, $msg);
+    }
 }
