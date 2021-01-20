@@ -98,3 +98,9 @@ Route::post('logTest', 'databases.LogTestController/logTest');
 // 分页查询
 Route::any('pageQuery1', 'databases.DataBasesTest/pageQuery1');
 Route::any('pageQuery2', 'databases.DataBasesTest/pageQuery2');
+
+// 验证器的测试2
+Route::post('reg', 'user.User/reg');
+Route::post('login', 'user.User/login');
+Route::post('update', 'user.User/update');
+Route::post('del', 'user.User/delete');
